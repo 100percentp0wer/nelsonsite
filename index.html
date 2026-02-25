@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100percent — Rebrand Update</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0A09;
+  --text: #FAFAF9;
+  --green: #4ADE80;
+  --green-dim: rgba(74, 222, 128, 0.5);
+  --green-glow: rgba(74, 222, 128, 0.04);
+  --green-border: rgba(74, 222, 128, 0.15);
+  --muted: rgba(250, 250, 249, 0.65);
+  --dim: rgba(250, 250, 249, 0.45);
+  --faint: rgba(250, 250, 249, 0.25);
+  --card: rgba(255, 255, 255, 0.025);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.04);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Top glow */
+.top-glow {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% -20%, rgba(74,222,128,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Side nav */
+.side-nav {
+  position: fixed;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+@media (max-width: 900px) { .side-nav { display: none; } }
+.side-nav a {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--faint);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.3s;
+  letter-spacing: 0.03em;
+}
+.side-nav a.active { color: var(--green); font-weight: 500; }
+.side-nav a:hover { color: var(--muted); }
+
+/* Header */
+header {
+  padding-top: 100px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 80px;
+}
+.header-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(250,250,249,0.3);
+  margin-bottom: 32px;
+}
+header h1 {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+@media (max-width: 600px) { header h1 { font-size: 36px; } }
+header h1 .accent { color: var(--green); font-style: italic; }
+header p {
+  font-size: 16px;
+  color: rgba(250,250,249,0.5);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* Sections */
+section { margin-bottom: 100px; }
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(74,222,128,0.25);
+}
+section h2 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) { section h2 { font-size: 26px; } }
+section h2 em { font-style: italic; }
+section h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+p.body { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+p.body .old { color: rgba(250,250,249,0.3); font-style: italic; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+.card.accent {
+  background: var(--green-glow);
+  border-color: var(--green-border);
+}
+.card.amber {
+  background: rgba(251,191,36,0.03);
+  border-color: rgba(251,191,36,0.1);
+}
+.card-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.card-label.green { color: var(--green); }
+.card-label.dim { color: rgba(250,250,249,0.4); }
+.card-label.amber { color: #FBBF24; }
+
+/* Compare rows */
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+@media (max-width: 600px) { .compare-row { grid-template-columns: 1fr; } }
+.compare-before, .compare-after {
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.compare-before {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  color: var(--dim);
+}
+.compare-after {
+  background: rgba(74,222,128,0.03);
+  border: 1px solid rgba(74,222,128,0.12);
+  color: rgba(250,250,249,0.85);
+}
+.compare-tag {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.compare-before .compare-tag { color: rgba(255,255,255,0.2); }
+.compare-after .compare-tag { color: var(--green); }
+
+/* Two column grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
+
+/* Stats */
+.stat-number {
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-family: var(--serif);
+  text-align: center;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Feature quote */
+.featured-quote {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.quote-sub { font-size: 14px; color: rgba(250,250,249,0.55); line-height: 1.65; }
+
+/* Hierarchy row */
+.hierarchy-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hierarchy-row:last-child { border-bottom: none; }
+.hierarchy-level { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--faint); min-width: 52px; flex-shrink: 0; }
+.hierarchy-title { font-size: 13px; font-weight: 500; min-width: 120px; flex-shrink: 0; }
+.hierarchy-desc { font-size: 13px; color: rgba(250,250,249,0.5); line-height: 1.5; }
+
+/* Chapter rows */
+.chapter-row {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.chapter-row:last-child { border-bottom: none; }
+.chapter-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--green); min-width: 68px; flex-shrink: 0; padding-top: 3px; }
+.chapter-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.chapter-desc { font-size: 13px; color: var(--dim); line-height: 1.55; }
+
+/* Parallel */
+.parallel-divider {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(74,222,128,0.1);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--green);
+  text-align: center;
+  line-height: 1.45;
+}
+
+/* Pitch steps */
+.pitch-step {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.pitch-num { font-size: 11px; font-weight: 600; color: var(--green-dim); min-width: 24px; }
+.pitch-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+/* Advantage card */
+.adv-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+.adv-title { font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+.adv-desc { font-size: 13px; color: var(--dim); line-height: 1.55; }
+
+/* Expansion pills */
+.pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.04);
+  color: rgba(250,250,249,0.35);
+  border: 1px solid var(--card-border);
+}
+.pill.active {
+  background: rgba(74,222,128,0.12);
+  color: var(--green);
+  border-color: rgba(74,222,128,0.25);
+}
+.pill-now { margin-left: 8px; font-size: 10px; opacity: 0.6; }
+
+/* Check list */
+.check-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.check-icon { font-size: 14px; margin-top: 2px; flex-shrink: 0; }
+.check-icon.green { color: var(--green); }
+.check-icon.amber { color: #FBBF24; }
+.check-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+/* Question list */
+.question-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.question-item:last-child { border-bottom: none; }
+.question-text { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.question-detail { font-size: 13px; color: rgba(250,250,249,0.4); line-height: 1.5; }
+
+/* Closing */
+.closing {
+  text-align: center;
+  padding: 40px 0;
+}
+.closing-quote {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(250,250,249,0.7);
+  line-height: 1.5;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+.closing-brand {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+
+footer {
+  text-align: center;
+  padding: 32px 0 48px;
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+footer p { color: rgba(250,250,249,0.15); font-size: 11px; }
+
+/* Fade in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="top-glow"></div>
+
+<nav class="side-nav">
+  <a href="#shift">The Shift</a>
+  <a href="#identity">Brand Identity</a>
+  <a href="#impact">Impact Chain</a>
+  <a href="#positioning">Positioning</a>
+  <a href="#gtm">Go-To-Market</a>
+  <a href="#status">Where We Are</a>
+</nav>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="fade-in">
+      <div class="header-label">100percent · Rebrand Update</div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.15s">
+      <h1>Where we are.<br><span class="accent">Where we're going.</span></h1>
+    </div>
+    <div class="fade-in" style="transition-delay:0.3s">
+      <p>A complete overview of the 100percent rebrand — the strategic shift, the new identity, the impact chain, and the go-to-market direction. Prepared for our conversation on the 27th.</p>
+    </div>
+  </header>
+
+  <!-- SECTION 1: THE SHIFT -->
+  <section id="shift">
+    <div class="fade-in">
+      <div class="section-label">01 — The Shift</div>
+      <h2>We stopped being a charging company.</h2>
+      <p class="body">When you last saw our website, it said <span class="old">"Keep Guests Charged & Spending Longer."</span> That's what every power bank company says. It sells dwell time and revenue share. It speaks to a venue's spreadsheet, not their gut. It put us in the same box as ChargedUp, Joos, and everyone else.</p>
+      <p class="body">We've moved away from this completely. The rebrand is built around one insight: a phone dying in public isn't a tech problem — it's a human one. We don't sell power banks. We protect moments. And we've rebuilt everything — the brand, the messaging, the positioning, the impact story — around that belief.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="compare-row">
+        <div class="compare-before"><span class="compare-tag">Before</span>Keep Guests Charged & Spending Longer</div>
+        <div class="compare-after"><span class="compare-tag">Now</span>Don't let your battery decide when your night ends.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-before"><span class="compare-tag">Before</span>Power bank rental company with revenue share</div>
+        <div class="compare-after"><span class="compare-tag">Now</span>The company that makes sure no moment gets lost to a dead battery</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-before"><span class="compare-tag">Before</span>Product-first pitch: here's our kiosk, here's your revenue</div>
+        <div class="compare-after"><span class="compare-tag">Now</span>Belief-first pitch: here's the moment being lost, here's what we prevent</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-before"><span class="compare-tag">Before</span>No impact story</div>
+        <div class="compare-after"><span class="compare-tag">Now</span>Every charge backs a woman entrepreneur rebuilding after war</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: BRAND IDENTITY -->
+  <section id="identity">
+    <div class="fade-in">
+      <div class="section-label">02 — Brand Identity</div>
+      <h2>What 100percent <em>feels</em> like now.</h2>
+    </div>
+
+    <div class="fade-in">
+      <div class="card accent">
+        <div class="card-label green">Commander's Intent</div>
+        <div style="font-family:var(--serif);font-size:26px;font-style:italic;line-height:1.35">"We never let a moment go dark."</div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-label dim">Tagline</div>
+          <div style="font-size:18px">Every Moment. Powered.</div>
+        </div>
+        <div class="card">
+          <div class="card-label dim">Impact Line</div>
+          <div style="font-size:18px">Every charge powers more than a phone.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <p class="body">The personality is the friend who makes sure everyone's having the best night of their lives AND makes sure everyone gets home safe. Reliable but not boring. Energetic but not loud. Warm but with depth.</p>
+      <p class="body">Underneath the energy, there's a story. A founder who's already on the ground in war-affected communities, already backing women entrepreneurs, already building something that lasts longer than any single charge. The customer senses it without being lectured.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="card accent">
+        <div class="card-label green">The Messaging Hierarchy</div>
+        <p style="font-size:14px;color:rgba(250,250,249,0.55);line-height:1.65;margin-bottom:16px">Following Steve Jobs: sell the improvement first, then the mechanism, then the mission. The impact chain comes last — not because it's least important, but because it lands hardest when everything before it has already connected.</p>
+        <div class="hierarchy-row">
+          <span class="hierarchy-level">Level 1</span>
+          <span class="hierarchy-title" style="color:#FAFAF9">The Headline</span>
+          <span class="hierarchy-desc">Don't let your battery decide when your night ends.</span>
+        </div>
+        <div class="hierarchy-row">
+          <span class="hierarchy-level">Level 2</span>
+          <span class="hierarchy-title" style="color:rgba(250,250,249,0.75)">The Mechanism</span>
+          <span class="hierarchy-desc">Tap. Grab. Charge on the go. Return to any kiosk. From £3.</span>
+        </div>
+        <div class="hierarchy-row">
+          <span class="hierarchy-level">Level 3</span>
+          <span class="hierarchy-title" style="color:rgba(250,250,249,0.6)">The Differentiator</span>
+          <span class="hierarchy-desc">2× faster. Costs less. Your brand on our screen, not ours.</span>
+        </div>
+        <div class="hierarchy-row">
+          <span class="hierarchy-level">Level 4</span>
+          <span class="hierarchy-title" style="color:var(--green)">The Mission</span>
+          <span class="hierarchy-desc">Every charge funds microloans for women entrepreneurs rebuilding after war. The loans recycle. The impact is perpetual.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: IMPACT CHAIN -->
+  <section id="impact">
+    <div class="fade-in">
+      <div class="section-label">03 — The Impact Chain</div>
+      <h2>Not charity. Infrastructure.</h2>
+      <p class="body">The original impact chain was solar lights for children studying after dark. Simple, emotional — but it was closer to delivering an object than backing a person. We've shifted to something fundamentally stronger: funding women entrepreneurs in war-affected communities through a digital microfinance scheme.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="card accent">
+        <div class="featured-quote">"Every charge helps a woman in a war-affected community build a business."</div>
+        <p class="quote-sub">"Build a business" signals empowerment, not charity. "War-affected" carries the gravity without needing explanation. The audience understands: this isn't a handout. This is someone being backed.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3>The Compounding Model</h3>
+      <p class="body">This is the structural advantage that separates 100percent from every other purpose-driven brand. The loans get repaid. The capital recycles with interest. New women access it. A charge on a kiosk in 2026 is still funding women in 2030, 2035, and beyond — without another penny going in.</p>
+      <p class="body">Even if 100percent disappeared tomorrow, the capital already in the system keeps cycling. The women keep building. That's not charity. That's infrastructure. And it's the thing that makes sophisticated decision-makers lean in — because they recognise it's structurally different from CSR.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="card accent">
+        <div class="card-label green">The Parallel</div>
+        <div class="grid-2" style="margin-bottom:0">
+          <p style="font-size:14px;color:rgba(250,250,249,0.5);line-height:1.65">In a London bar, your phone dies. Your night stalls. You tap our kiosk. Your moment continues.</p>
+          <p style="font-size:14px;color:rgba(250,250,249,0.5);line-height:1.65">In the Eastern Province of Sri Lanka, a woman who lost everything to war is building a business from nothing. Every charge on our kiosks is part of what's backing her.</p>
+        </div>
+        <div class="parallel-divider">You keep your night going. She keeps her future going.<br>Same charge. And that charge keeps working long after both of you have moved on.</div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3>What's Already Real</h3>
+      <div class="grid-3">
+        <div class="card">
+          <div class="stat-number">120+</div>
+          <div class="stat-label">Women in the microfinance scheme</div>
+        </div>
+        <div class="card">
+          <div class="stat-number">£125</div>
+          <div class="stat-label">Starts a business on fair terms</div>
+        </div>
+        <div class="card">
+          <div class="stat-number">Q1 '26</div>
+          <div class="stat-label">Scheme goes live</div>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--dim);line-height:1.65">Partnership with Vanni Hope, through the Aram Initiative. Digital microfinance for women-owned businesses in Sri Lanka's Eastern Province — agriculture, value-add, food production. The infrastructure to deliver on this impact chain is not hypothetical. It's in motion.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="card" style="margin-top:24px">
+        <div class="card-label dim">The Journey</div>
+        <div class="chapter-row">
+          <div class="chapter-label">Chapter 1</div>
+          <div><div class="chapter-title">Back 100 Women</div><div class="chapter-desc">Fund, support, and document 100 women entrepreneurs. The audience follows the counter from 0 to 100. They meet individual women along the way.</div></div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-label">Chapter 2</div>
+          <div><div class="chapter-title">Go Deeper</div><div class="chapter-desc">Help those businesses grow. Connect them to new markets. The first loans get repaid — the compounding begins visibly. The audience watches women they know by name go from starting to thriving.</div></div>
+        </div>
+        <div class="chapter-row" style="border-bottom:none">
+          <div class="chapter-label">Chapter 3</div>
+          <div><div class="chapter-title">The Ripple</div><div class="chapter-desc">A woman's business employs another woman. Her children go to school. Her community has a new income source. The repaid capital funds the next woman. Individual success becomes community transformation.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: POSITIONING -->
+  <section id="positioning">
+    <div class="fade-in">
+      <div class="section-label">04 — Competitive Positioning</div>
+      <h2>They sell the box. We sell what the box protects.</h2>
+      <p class="body">Our competitors — ChargedUp, Joos, Naki, ZAPT — all position as power bank rental companies selling dwell time and revenue share. We position on meaning, not mechanics. They optimised their product for their business model (slower charging = longer rentals = more revenue). We optimised for the human experience. That's why our product is genuinely better AND cheaper.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="grid-2">
+        <div class="card">
+          <div class="adv-label">Speed as philosophy</div>
+          <div class="adv-title">2× Faster</div>
+          <div class="adv-desc">We'd rather you were back in your moment than watching a battery bar.</div>
+        </div>
+        <div class="card">
+          <div class="adv-label">Price as principle</div>
+          <div class="adv-title">Costs Less</div>
+          <div class="adv-desc">Access to power shouldn't feel like a cost. It should feel like nothing.</div>
+        </div>
+        <div class="card">
+          <div class="adv-label">Design as respect</div>
+          <div class="adv-title">Your Brand, Not Ours</div>
+          <div class="adv-desc">Our kiosks carry your venue's brand. Your space should look like yours.</div>
+        </div>
+        <div class="card">
+          <div class="adv-label">Impact as moat</div>
+          <div class="adv-title">Perpetual Impact</div>
+          <div class="adv-desc">Every charge seeds a loan that recycles forever. No competitor has anything close.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="card accent">
+        <div class="card-label green">The Venue Pitch — In Order</div>
+        <div class="pitch-step"><span class="pitch-num">01</span><span class="pitch-text">Open with the moment being lost. Not the product.</span></div>
+        <div class="pitch-step"><span class="pitch-num">02</span><span class="pitch-text">Let them feel it — the nights ending early, the Ubers that never get called, the groups that split.</span></div>
+        <div class="pitch-step"><span class="pitch-num">03</span><span class="pitch-text">Introduce 100percent as the answer. Free for the venue. Revenue share. Better product.</span></div>
+        <div class="pitch-step"><span class="pitch-num">04</span><span class="pitch-text">Product advantages confirm the feeling — faster, cheaper, their brand on our screen.</span></div>
+        <div class="pitch-step"><span class="pitch-num">05</span><span class="pitch-text">Close with the trial. Two weeks. No cost. No commitment.</span></div>
+        <div class="pitch-step" style="margin-bottom:0"><span class="pitch-num">06</span><span class="pitch-text">The impact chain is the final reveal — the thing that makes them proud, not just profitable.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: GTM -->
+  <section id="gtm">
+    <div class="fade-in">
+      <div class="section-label">05 — Go-To-Market</div>
+      <h2>Nightlife first. Density before breadth.</h2>
+      <p class="body">Per your advice — we're focused on one venue type. Nightlife is where the "lost moment" hits hardest emotionally, where competitors are most active (meaning big groups have been pitched and we can dislodge or differentiate), and where the social proof and content engine work best.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="card">
+        <div class="card-label dim">Target Decision-Maker</div>
+        <p style="font-size:15px;color:rgba(250,250,249,0.7);line-height:1.65">Head of operations or head of partnerships at a venue group running 20+ sites who has already been pitched by ChargedUp or Joos and thinks they're all the same. We're not selling to independents. We're going straight to the groups — because the concept is validated globally and we need to prove that we are the one they should pick.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="card">
+        <div class="card-label dim">The Two Weapons</div>
+        <div class="grid-2" style="margin-bottom:0">
+          <div>
+            <div style="font-size:15px;font-weight:500;margin-bottom:6px">Aggressive economics</div>
+            <p style="font-size:13px;color:var(--dim);line-height:1.55">Competitive revenue share that eliminates the switching cost. We lead with this to get in the door. The first big group deal is a loss leader for everything after it.</p>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:500;margin-bottom:6px">Brand & impact differentiation</div>
+            <p style="font-size:13px;color:var(--dim);line-height:1.55">This is what makes them want to switch fully — and what makes them stay. Venue branding, quarterly impact reports, a partnership that deepens over time. No competitor offers anything close.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="card-label dim" style="margin-bottom:16px">Expansion Sequence</div>
+      <div class="pills">
+        <div class="pill active">Nightlife<span class="pill-now">NOW</span></div>
+        <div class="pill">2. Events & Festivals</div>
+        <div class="pill">3. Tourism & Leisure</div>
+        <div class="pill">4. Healthcare</div>
+        <div class="pill">5. Transport & Shopping</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: STATUS -->
+  <section id="status">
+    <div class="fade-in">
+      <div class="section-label">06 — Where We Are Now</div>
+      <h2>What's done. What's next.</h2>
+    </div>
+
+    <div class="fade-in">
+      <div class="card">
+        <div class="card-label green">Completed</div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Complete brand identity rebuilt — brand system, voice, messaging hierarchy, competitive positioning</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Impact chain developed — shifted from solar lights to women's empowerment through microfinance</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Compounding model defined — loans recycle, impact is perpetual, structurally different from CSR</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Founder video scripts written — 25+ scripts across 5 series: product, moments, impact, founder journey, bigger picture</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Content calendar structured — 3 posts/week, golden ratio of 1 impact video per 3–4 product/belief videos</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Website direction set — one-page site built, redesign brief created for full rebuild</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">Sales philosophy defined — belief-first pitch, trial close, objection reframing, historical parallels</span></div>
+        <div class="check-item"><span class="check-icon green">✓</span><span class="check-text">GTM focused on nightlife, targeting venue groups not independents</span></div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="card amber">
+        <div class="card-label amber">Before Going Public with Impact</div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">Charge-to-impact number confirmed — how many charges = one woman backed. Real maths. Verified.</span></div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">Microfinance scheme live and functioning (end of Q1 2026 target with Vanni Hope)</span></div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">Consent protocols in place — every woman featured has given informed consent</span></div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">3–5 women's stories filmed and ready to tell on launch day</span></div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">Visual standard set — determination, agency, warmth. Entrepreneurs, not beneficiaries.</span></div>
+        <div class="check-item"><span class="check-icon amber">○</span><span class="check-text">Compounding model verified with real repayment data</span></div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="card">
+        <div class="card-label dim">What I'd Like Your Thoughts On</div>
+        <div class="question-item"><div class="question-text">Does this positioning feel genuinely different?</div><div class="question-detail">When you look at this brand versus what you've seen from competitors in this space — does it stand apart?</div></div>
+        <div class="question-item"><div class="question-text">Does the impact chain land as real differentiation for big groups?</div><div class="question-detail">Or is it a nice-to-have that doesn't move the needle in a venue group decision-maker's mind?</div></div>
+        <div class="question-item"><div class="question-text">The compounding model — is this the thing that makes sophisticated people lean in?</div><div class="question-detail">The perpetual impact, the recycling capital — does this register as structurally different, or does it need to be simpler?</div></div>
+        <div class="question-item"><div class="question-text">How do we get in front of the big groups?</div><div class="question-detail">With this brand, this product, this impact story — what's the fastest path to the decision-makers that matter?</div></div>
+        <div class="question-item" style="border-bottom:none"><div class="question-text">What am I not seeing?</div><div class="question-detail">You've built and scaled in hospitality before. What's the blind spot?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section style="padding-top:40px;border-top:1px solid var(--line)">
+    <div class="fade-in">
+      <div class="closing">
+        <div class="closing-quote">The mission was here first.<br>The business was built around it.<br>That order of operations can't be faked.</div>
+        <div class="closing-brand">100percent — Every Moment. Powered.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>100percent · Prepared for Nelson Sivalingam · February 2026</p>
+  </footer>
+
+</div>
+
+<script>
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Active nav highlight
+const sections = ['shift','identity','impact','positioning','gtm','status'];
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 120) current = id;
+  });
+  document.querySelectorAll('.side-nav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
